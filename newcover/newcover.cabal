@@ -1,0 +1,63 @@
+cabal-version: 3.0
+name:          knotools
+version:       0.1.0.0
+build-type:    Simple
+
+common warnings
+  ghc-options:      -Wall
+  default-language: Haskell2010
+
+library
+  import:          warnings
+  exposed-modules:
+    Command
+    PageRect
+    Params
+    Parser
+
+  build-depends:
+    , attoparsec
+    , base                  ^>=4.18.2.1
+    , bytestring
+    , filepath
+    , io-streams
+    , microlens-platform
+    , optparse-applicative
+    , transformers
+
+  hs-source-dirs:  src
+
+executable newcover
+  import:         warnings
+  main-is:        Main.hs
+  build-depends:
+    , base                ^>=4.18.2.1
+    , bytestring
+    , io-streams
+    , knotools
+    , microlens-platform
+    , temporary
+    , transformers
+
+  hs-source-dirs: app
+
+test-suite tests
+  import:         warnings
+  type:           exitcode-stdio-1.0
+  hs-source-dirs: test
+  main-is:        Main.hs
+  other-modules:
+    TestCommand
+    TestData
+    TestOutputFileName
+    TestParser
+
+  build-depends:
+    , attoparsec
+    , base                ^>=4.18.2.1
+    , bytestring
+    , knotools
+    , microlens-platform
+    , raw-strings-qq
+    , tasty
+    , tasty-hunit
